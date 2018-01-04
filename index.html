@@ -571,7 +571,7 @@
 		<div class="louceng">
 			<div class="louceng_title">
 				<a href="">
-					<h3>4F 享优惠</h3>
+					<h3>5F 享优惠</h3>
 				</a>
 				<ul>
 					<li><a class="all" href="">全部</a></li>
@@ -1025,7 +1025,14 @@
 				</div>
 			</div>
 		</footer>
-	
+		<ul class="cedaohang">
+			<li>享优惠</li>
+			<li>享优惠</li>
+			<li>享优惠</li>
+			<li>享优惠</li>
+			<li>享优惠</li>
+			<a id="totop" href="">回到顶部</a>
+		</ul>
 	
 		<script>
 		let baces=document.querySelectorAll(".bace li");
@@ -1034,7 +1041,7 @@
 		let btn_left=document.querySelector(".ban_btn .ban_btn_left");
 		let btn_right=document.querySelector(".ban_btn .ban_btn_right");
 		
-		
+{		
 		lunbos.forEach(function(ele,index){
 			ele.onclick=function(){
 				for(var i=0;i<baces.length;i++){
@@ -1082,6 +1089,67 @@
 		btn_right.onclick=function(){
 			xunhuan("r");
 		}
+		
+}		
+{
+	let totop=document.querySelector(".cedaohang #totop");
+	
+	let lcdjs=document.querySelectorAll(".cedaohang li");
+	let lc_box=document.querySelectorAll(".louceng");
+	totop.onclick=function(){
+		let st=document.documentElement.scrollTop;
+		let speed=st/500*30;
+		let t=setInterval(function(){
+			st-=speed;
+			if(st<=0){
+				st=0;
+				clearInterval(t);
+			}
+			document.documentElement.scrollTop=st;
+		},30)
+	}
+
+	
+	lcdjs.forEach(function(ele,index){
+		ele.onclick=function(){
+			let foor=lc_box[index].offsetTop;
+			//获取每个楼层的距离文档顶部的值
+			let now=document.documentElement.scrollTop;
+			//获取窗口的滚动条的垂直位置。
+			let speed=(foor-now)*30/300;
+			//每个楼层
+			let time=0;
+			let t=setInterval(function(){
+				time+=30;
+				now+=speed;
+				if(time===300){
+					clearInterval(t);
+				}
+				document.documentElement.scrollTop=now;
+			},30)
+		}
+	})
+	
+	let cdh=document.querySelectorAll(".cedaohang");
+	window.onscroll=function(){
+		let st=document.documentElement.scrollTop;
+//		if(st>1000){    这段代码有错误
+//			cdh.style.display="block"
+//		}else{
+//			cdh.style.display="none"
+//		}
+		lc_box.forEach(function(ele,index){
+			if(st>=ele.offsetTop){
+				for(let i=0;i<lcdjs.length;i++){
+					lcdjs[i].classList.remove("dianji");
+				}
+				lcdjs[index].classList.add("dianji");
+			}
+		})
+	}
+}
+		
+		
 		
 	</script>
 	
